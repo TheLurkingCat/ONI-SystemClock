@@ -1,0 +1,8 @@
+# configs
+.vs/
+.vscode/
+# dependencies
+packages/
+lib/
+# intermediate files
+SystemClockRemake/obj/
