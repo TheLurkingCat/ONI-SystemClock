@@ -56,7 +56,15 @@ namespace SystemClockRemake
         {
             if (SaveGame.Instance == null)
                 return;
-            ___locText.text += string.Format("\n{0}", System.DateTime.Now.ToString(PatchGameLoad.Option.TimeStringFormat));
+            try
+            {
+                ___locText.text += string.Format("\n{0}", System.DateTime.Now.ToString(PatchGameLoad.Option.TimeStringFormat));
+            }
+            catch (System.FormatException)
+            {
+                ___locText.text += string.Format("\n{0}", System.DateTime.Now.ToString("HH:mm:ss"));
+            }
+            
         }
     }
 }
