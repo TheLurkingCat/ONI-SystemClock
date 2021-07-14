@@ -6,5 +6,5 @@ But this mod is completely independent to it.
 
 ## Dependencies
 
-- [Harmony](https://github.com/pardeike/Harmony) created by [pardeike](https://github.com/pardeike)
-- [PLib](https://github.com/peterhaneve/ONIMods/tree/master/PLib) created by [PeterHan](https://github.com/peterhaneve)
+- [Harmony](https://github.com/pardeike/Harmony) created by [Andreas Pardeike](https://github.com/pardeike)
+- [PLib](https://github.com/peterhaneve/ONIMods/tree/main/PLib) created by [Peter Han](https://github.com/peterhaneve)
