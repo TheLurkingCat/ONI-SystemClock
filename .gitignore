@@ -3,6 +3,10 @@
 .vscode/
 # dependencies
 packages/
-lib/
+lib/*
+!lib/.gitkeep
 # intermediate files
 SystemClockRemake/obj/
+# ignore other files
+bin/
+!bin/SystemClockRemake.dll
