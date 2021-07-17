@@ -53,11 +53,12 @@
       <HintPath>..\lib\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="PLib">
-      <HintPath>..\packages\PLib.4.3.0\lib\net471\PLib.dll</HintPath>
+    <Reference Include="PLib, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PLib.4.4.0\lib\net471\PLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
     <Reference Include="Unity.TextMeshPro">
       <HintPath>..\lib\Unity.TextMeshPro.dll</HintPath>
       <Private>False</Private>
@@ -77,6 +78,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cd ..\lib
-..\packages\ILMerge.3.0.41\tools\net452\ILMerge.exe /ndebug /out:..\modinfo\SystemClockRemake.dll ..\bin\SystemClockRemake.dll PLib.dll /targetplatform:v4,"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.1"</PostBuildEvent>
+..\packages\ILMerge.3.0.41\tools\net452\ILMerge.exe /ndebug /out:..\modinfo\SystemClockRemake.dll ..\bin\SystemClockRemake.dll ..\packages\PLib.4.4.0\lib\net471\PLib.dll /targetplatform:v4,"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.1"</PostBuildEvent>
   </PropertyGroup>
 </Project>
