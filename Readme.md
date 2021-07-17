@@ -17,4 +17,4 @@ run "Build" in visual studio, you will get two files
   - bin/SystemClockRemake.dll (without merge with PLib)
   - modinfo/SystemClockRemake.dll (merged with PLib)
 
-### If you want to download and use this mod without steam workshop, you can download the modinfo folder.
+### If you want to download and use this mod without steam workshop, you can download binary from Release page.

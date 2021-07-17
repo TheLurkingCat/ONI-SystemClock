@@ -9,4 +9,4 @@ lib/*
 SystemClockRemake/obj/
 # ignore other files
 bin/
-!bin/SystemClockRemake.dll
+*.dll
