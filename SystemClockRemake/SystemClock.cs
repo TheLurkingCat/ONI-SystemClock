@@ -2,6 +2,7 @@
 using HarmonyLib;
 using PeterHan.PLib.Options;
 using PeterHan.PLib.Core;
+using System.Reflection;
 
 namespace SystemClockRemake
 {
@@ -36,35 +37,48 @@ namespace SystemClockRemake
 
         public static void Prefix()
         {
+            ReadSettings();
+        }
+
+        public static void ReadSettings()
+        {
             Option = POptions.ReadSettings<SystemClockOptions>() ?? new SystemClockOptions();
         }
     }
     // Refresh clock per second
-    [HarmonyPatch(typeof(MeterScreen), "Render1000ms")]
+    [HarmonyPatch(typeof(MeterScreen), "Refresh")]
     public static class PatchMeterScreenRender
     {
         public static void Postfix()
         {
-            TopLeftControlScreen.Instance.RefreshName();
-        }
-    }
-    // Append text to colony name
-    [HarmonyPatch(typeof(TopLeftControlScreen), "RefreshName")]
-    public static class PatchColonyRefreshName
-    {
-        public static void Postfix(ref LocText ___locText)
-        {
-            if (SaveGame.Instance == null)
+            // New Game doesn't call load to read settings
+            if (PatchGameLoad.Option is null)
+            {
+                PatchGameLoad.ReadSettings();
+            }
+            // Check screen spawned
+            var ColonyUI = TopLeftControlScreen.Instance?.GetLocText();
+            if ((ColonyUI?.text) is null)
                 return;
-            ___locText.text += "\n";
+
+            ColonyUI.text = SaveGame.Instance.BaseName + "\n";
             try
             {
-                ___locText.text += System.DateTime.Now.ToString(PatchGameLoad.Option.TimeStringFormat);
+                ColonyUI.text += System.DateTime.Now.ToString(PatchGameLoad.Option.TimeStringFormat);
             }
             catch (System.FormatException)
             {
-                ___locText.text += System.DateTime.Now.ToString("HH:mm:ss");
+                ColonyUI.text += System.DateTime.Now.ToString("HH:mm:ss");
             }
+        }
+    }
+    // Reflection
+    public static class TopLeftControlScreenExtension
+    {
+        public static LocText GetLocText(this TopLeftControlScreen obj)
+        {
+            var field = obj.GetType().GetField("locText", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            return (LocText)field?.GetValue(obj);
             
         }
     }
